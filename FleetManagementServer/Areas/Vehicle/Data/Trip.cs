@@ -27,7 +27,12 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static List<Trip> Seed()
         {
-            return new List<Trip>() { new Trip() { Id = 1, StartTime = DateTime.Parse("2015/5/7"),}, new Trip() };
+            return new List<Trip>()
+            {
+                new Trip() { Id = 1, VehicleId = 1, FleetWayId = 1, StartTime = DateTime.Parse("2018/10/5") } ,
+                new Trip() { Id = 2, VehicleId = 2, FleetWayId = 1, StartTime = DateTime.Parse("2018/10/5")},
+                new Trip() { Id = 3, VehicleId = 3, FleetWayId = 1, StartTime = DateTime.Parse("2018/10/5")}
+            };
         }
     }
 }

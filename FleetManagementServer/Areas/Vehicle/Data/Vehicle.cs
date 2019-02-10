@@ -14,7 +14,8 @@ namespace FleetManagementServer.Areas.Vehicle.Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+
     public partial class Vehicle
     {
         public Vehicle()
@@ -55,8 +56,12 @@ namespace FleetManagementServer.Areas.Vehicle.Data
 
         public static List<Vehicle> Seed()
         {
-            return new List<Vehicle>() { new Vehicle() {Id = 1, VehicleTypeId = 2, Code = "100",BodyNumber = "A12-B15", MotorNumber = "C15-AC21-B", VinNumber = "1234567", Image = ImageHelper.FromFileToByte()},
-                new Vehicle() {Id =2, VehicleTypeId = 2, SecurityCode = new byte[]{1,2,3,4,5,6,7,8},SecurityCodeVerification = true}};
+            return new List<Vehicle>() { new Vehicle() {Id = 1, VehicleTypeId = 2, Code = "100",BodyNumber = "A12-B15", MotorNumber = "C15-AC21-B", VinNumber = "1234567"},
+                new Vehicle() {Id = 2, VehicleTypeId = 2, Code = "104",BodyNumber = "A15-D15", MotorNumber = "C15-AC21-B", VinNumber = "134567"},
+                new Vehicle() {Id = 3, VehicleTypeId = 2, Code = "101",BodyNumber = "A16-E15", MotorNumber = "C15-AC21-B", VinNumber = "124567"},
+                new Vehicle() {Id = 4, VehicleTypeId = 2, Code = "102",BodyNumber = "A17-D15", MotorNumber = "C15-AC21-B", VinNumber = "123567"},
+                new Vehicle() {Id = 5, VehicleTypeId = 2, Code = "103",BodyNumber = "A18-C15", MotorNumber = "C15-AC21-B", VinNumber = "123467"},
+            };
         }
     }
 }
