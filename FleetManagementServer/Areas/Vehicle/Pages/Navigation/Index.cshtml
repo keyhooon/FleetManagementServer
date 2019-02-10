@@ -1,0 +1,58 @@
+﻿@page
+@model FleetManagementServer.Areas.Vehicle.Pages.Navigation.IndexModel
+@{
+}
+
+    <div>
+            @(Html.DevExtreme().Map()
+                  .ID("map")
+                  .Provider(GeoMapProvider.Google)
+                  .Zoom(14)
+                  .Height(440)
+                  .Width("100%")
+                  .Controls(true)
+                  .Center("Brooklyn Bridge,New York,NY")
+                  .Key(builder =>
+                  {
+                      builder.Google("AIzaSyBFrwqGoZrjtII61FOorCbl8Bqsc-0YJwo");
+                  })
+                  .Type(GeoMapType.Roadmap)
+                  )
+        </div>
+    <div class="option">
+            <span>Set mode</span>
+            @(Html.DevExtreme().SelectBox()
+                        .ID("choose-mode")
+                        .DataSource(new[] { "driving", "walking" })
+                        .Value("driving")
+                        .OnValueChanged("chooseMode_valueChanged")
+            )
+        </div>
+        <div class="option">
+            <span>Route color</span>
+            @(Html.DevExtreme().SelectBox()
+                        .ID("choose-color")
+                        .DataSource(new[] { "blue", "green", "red" })
+                        .Value("blue")
+                        .OnValueChanged("chooseColor_valueChanged")
+            )
+        </div>
+
+
+<script>
+    function getMap() {
+        return $("#map").dxMap("instance");
+    }
+
+    function chooseMode_valueChanged(data) {
+        getMap().option("routes", [$.extend({}, getMap().option("routes")[0], {
+            mode: data.value
+        })]);
+    }
+
+    function chooseColor_valueChanged(data) {
+        getMap().option("routes", [$.extend({}, getMap().option("routes")[0], {
+            color: data.value
+        })]);
+    }
+</script>

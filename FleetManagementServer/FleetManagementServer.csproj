@@ -6,10 +6,51 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\Vehicle\Pages\Navigation\_VehicleToolbar.cshtml.cs" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <Content Remove="Areas\Vehicle\Pages\Navigation\_VehicleToolbar.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="17.2.7" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="1.3.0" />
+    <PackageReference Include="EFCore.BulkExtensions" Version="2.4.0" />
+    <PackageReference Include="Generic.Repository" Version="1.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="2.2.1" />
+    <PackageReference Include="SharpKml.Core" Version="4.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0006" />
+    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\Device\Controllers\" />
+    <Folder Include="Areas\Device\Models\" />
+    <Folder Include="Areas\Vehicle\Models\" />
+    <Folder Include="Areas\Vehicle\Resources\VehicleBrandImage\" />
+    <Folder Include="Areas\Vehicle\Views\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="Areas\Vehicle\Resources\FleetWayKml\BRT4.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\Vehicle\Resources\VehicleBrandImage\Mercedes-Benz.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Areas\Vehicle\Resources\VehicleBrandImage\Renault.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

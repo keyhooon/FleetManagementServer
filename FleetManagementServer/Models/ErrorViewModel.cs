@@ -1,5 +1,3 @@
-using System;
-
 namespace FleetManagementServer.Models
 {
     public class ErrorViewModel
