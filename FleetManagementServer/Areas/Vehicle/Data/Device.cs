@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace FleetManagementServer.Areas.Vehicle.Data
@@ -20,9 +22,10 @@ namespace FleetManagementServer.Areas.Vehicle.Data
         {
             VehicleDeviceDetails = new HashSet<VehicleDeviceDetail>();
         }
-        public int Id { get; set; }
+
+
+        public Guid Id { get; set; }
         public Nullable<int> VehicleDeviceDetailId { get; set; }
-        public Guid Guid { get; set; }
         public byte[] SecurityCode { get; set; }
         public bool SecurityCodeVerification { get; set; }
     
@@ -32,7 +35,8 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Device>(builder => { builder.HasData(DeviceSeed.Seed()); });
+            
+            modelBuilder.Entity<Device>(builder => {  });
         }
     }
 
@@ -41,8 +45,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
 
         public static List<Device> Seed()
         {
-            return new List<Device>() { new Device() {Id = 1, Guid = Areas.Device.Data.DeviceSeed.Device1_Guid, SecurityCode = new byte[]{1,2,3,4,5,6,7,8},SecurityCodeVerification = true},
-                new Device() {Id=2, Guid = Areas.Device.Data.DeviceSeed.Device2_Guid, SecurityCode = new byte[]{1,2,3,4,5,6,7,8},SecurityCodeVerification = true}};
+            return null;
         }
     }
 }

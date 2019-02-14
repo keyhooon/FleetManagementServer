@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FleetManagementServer.Migrations
+namespace FleetManagementServer.Migrations.AccountDb
 {
     public partial class InitialCreate : Migration
     {

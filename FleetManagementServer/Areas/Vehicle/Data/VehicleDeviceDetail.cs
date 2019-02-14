@@ -8,7 +8,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public int Id { get; set; }
         public int vehicleDeviceId { get; set; }
-        public int DeviceId { get; set; }
+        public Guid DeviceId { get; set; }
 
         public DateTime InstallTime { get; set; }
 

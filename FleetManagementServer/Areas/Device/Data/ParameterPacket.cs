@@ -7,7 +7,7 @@ namespace FleetManagementServer.Areas.Device.Data
     public class ParameterPacket
     {
         public int Id { get; set; }
-        public int DeviceId { get; set; }
+        public Guid DeviceId { get; set; }
         public DateTime DateTime { get; set; }
 
         public AvlPacket AvlPacket { get; set; }

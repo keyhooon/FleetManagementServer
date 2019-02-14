@@ -16,7 +16,7 @@ namespace FleetManagementServer.Areas.Vehicle
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<FleetDbContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("VehicleDbContextConnection"),optionsBuilder => optionsBuilder.UseNetTopologySuite()));
+                        context.Configuration.GetConnectionString("VehicleDbContextConnection"),optionsBuilder => optionsBuilder.UseNetTopologySuite()).EnableSensitiveDataLogging());
                 services.AddFleetWayService();
             });
         }

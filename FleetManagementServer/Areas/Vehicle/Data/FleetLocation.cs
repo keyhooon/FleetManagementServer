@@ -17,7 +17,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     public partial class FleetLocation
     {
         public int Id { get; set; }
-        public int IdVehicle { get; set; }
+        public int VehicleId { get; set; }
         public Point Location { get; set; }
         public DateTime Date { get; set; }
     }

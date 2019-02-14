@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FleetManagementServer.Migrations
+namespace FleetManagementServer.Migrations.AccountDb
 {
     [DbContext(typeof(AccountDbContext))]
-    [Migration("20190131104545_InitialCreate")]
+    [Migration("20190214082448_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

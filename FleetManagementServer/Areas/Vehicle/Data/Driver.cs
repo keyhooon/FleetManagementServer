@@ -44,7 +44,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
         public static List<Driver> Seed()
         {
             return new List<Driver>() { new Driver() { Id = 1, BirthDate = DateTime.Parse("1998/10/30"),Name = "asqar", LastName = "jafari", PhoneNumber = "09124272445", NationalityNumber = "007089283848",LicenseNumber = "1234"},
-                new Driver() { Id = 1, BirthDate = DateTime.Parse("1995/10/30"),Name = "shahin", LastName = "bahari", PhoneNumber = "09128575442", NationalityNumber = "005045678901",LicenseNumber = "3421"}};
+                new Driver() { Id = 2, BirthDate = DateTime.Parse("1995/10/30"),Name = "shahin", LastName = "bahari", PhoneNumber = "09128575442", NationalityNumber = "005045678901",LicenseNumber = "3421"}};
         }
     }
 }

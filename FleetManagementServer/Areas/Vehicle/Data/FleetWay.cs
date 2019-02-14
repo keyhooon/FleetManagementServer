@@ -38,7 +38,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static void OnModelCreating(ModelBuilder modelBuilder)
         {
-           // modelBuilder.Entity<FleetWay>(builder => { builder.HasData(FleetWaySeed.Seed()); });
+            modelBuilder.Entity<FleetWay>(builder => { builder.HasData(FleetWaySeed.Seed()); });
         }
     }
     
@@ -46,11 +46,20 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static List<FleetWay> Seed()
         {
-            var fileStream = File.Open($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\Resources\\FleetWayKml\\BRT4.kml",FileMode.Open,FileAccess.Read);
-            var fleetWays = FleetWayHelper.GetFleetWaysFromKml(fileStream).ToList();
-            for (var i = 0; i < fleetWays.Count; i++)
+            var KmlFolder = new DirectoryInfo($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\Resources\\FleetWayKml\\");
+            var i = 1;
+            List<FleetWay> fleetWays = new List<FleetWay>();
+            foreach (var file in KmlFolder.EnumerateFiles())
             {
-                fleetWays[i].Id = i + 1;
+                var fileStream = file.Open(FileMode.Open, FileAccess.Read);
+                var fleetWaysFromKml = FleetWayHelper.GetFleetWaysFromKml(fileStream);
+                foreach (var fleetWay in fleetWaysFromKml)
+                {
+                    fleetWay.Id = i++;
+                    fleetWay.Way.SRID = 4326;
+                }
+                fleetWays.AddRange(fleetWaysFromKml);
+
             }
             return fleetWays;
         }

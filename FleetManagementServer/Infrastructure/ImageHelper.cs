@@ -17,7 +17,7 @@ namespace FleetManagementServer.Infrastructure
             byte[] binary;
             using (var memoryStream = new MemoryStream())
             {
-                using (var image = Image.Load($"{ Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\VehicleBrandImage\\Mercedes - Benz.png"))
+                using (var image = Image.Load(path))
                 {
                     image.Mutate(x => x.Resize(256, 256));
                     image.Save(memoryStream, PngFormat.Instance); // Automatic encoder selected based on extension.

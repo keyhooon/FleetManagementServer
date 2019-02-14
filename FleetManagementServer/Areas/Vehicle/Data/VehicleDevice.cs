@@ -30,7 +30,14 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static List<VehicleDevice> Seed()
         {
-            return new List<VehicleDevice>() { new VehicleDevice() { }, new VehicleDevice() };
+            return new List<VehicleDevice>()
+            {
+                new VehicleDevice() {Id = 1,date = DateTime.Parse("2017/1/1"),VehicleId = 1}
+              , new VehicleDevice() { Id = 2, date = DateTime.Parse("2018/1/1"), VehicleId = 2 }
+              , new VehicleDevice() { Id = 3, date = DateTime.Parse("2017/5/1"), VehicleId = 5 }
+              , new VehicleDevice() { Id = 4, date = DateTime.Parse("2018/1/1"), VehicleId = 4 }
+              , new VehicleDevice() { Id = 5, date = DateTime.Parse("2018/1/1"), VehicleId = 3 }
+            };
         }
     }
 }

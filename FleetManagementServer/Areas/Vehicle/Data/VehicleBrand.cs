@@ -40,7 +40,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VehicleBrand>(builder => { builder.HasData(VehicleBrandSeed.Seed()); });
+           modelBuilder.Entity<VehicleBrand>(builder => { builder.HasData(VehicleBrandSeed.Seed()); });
         }
     }
 
@@ -48,9 +48,11 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static IEnumerable<VehicleBrand> Seed()
         {
-            return new VehicleBrand[] {new VehicleBrand() {Id=1, Name = "Benz", Image = ImageHelper.FromFileToByte($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\VehicleBrandImage\\Mercedes - Benz.png") },
-                new VehicleBrand() {Id =2, Name = "Renault", Image = ImageHelper.FromFileToByte($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\VehicleBrandImage\\Renault.png") }};
-            }
+
+            var ImageFolderPath =  $"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\Resources\\VehicleBrandImage\\";
+            return new VehicleBrand[] {new VehicleBrand() {Id=1, Name = "Benz", Image = ImageHelper.FromFileToByte($"{ImageFolderPath}Mercedes-Benz.png") },
+                new VehicleBrand() {Id =2, Name = "Renault", Image = ImageHelper.FromFileToByte($"{ImageFolderPath}Renault.png") }};
+            
         }
     }
 }

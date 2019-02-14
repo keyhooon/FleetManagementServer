@@ -20,10 +20,10 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public Vehicle()
         {
-            Devices = new HashSet<VehicleDevice>();
-            Drivers = new HashSet<VehicleDriver>();
-            Trips = new HashSet<Trip>();
-            Locations = new HashSet<FleetLocation>();
+            //Devices = new HashSet<VehicleDevice>();
+            //Drivers = new HashSet<VehicleDriver>();
+            //Trips = new HashSet<Trip>();
+            //Locations = new HashSet<FleetLocation>();
         }
     
         public int Id { get; set; }

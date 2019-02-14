@@ -55,11 +55,10 @@ namespace FleetManagementServer.Migrations.DeviceDb
 
             modelBuilder.Entity("FleetManagementServer.Areas.Device.Data.Device", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("Guid");
+                    b.Property<int?>("DeviceTypeId");
 
                     b.Property<string>("Imei");
 
@@ -69,25 +68,9 @@ namespace FleetManagementServer.Migrations.DeviceDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Devices");
+                    b.HasIndex("DeviceTypeId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Guid = new Guid("eccb0560-af46-4cea-a4ef-84a6a132bf75"),
-                            Imei = "990000862471854",
-                            SecurityCode = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 },
-                            SecurityCodeVerification = true
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Guid = new Guid("eccb0560-af46-4cea-a4ef-84a6a132bf75"),
-                            Imei = "351756051523999",
-                            SecurityCode = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 },
-                            SecurityCodeVerification = true
-                        });
+                    b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("FleetManagementServer.Areas.Device.Data.DeviceParameterType", b =>
@@ -96,17 +79,38 @@ namespace FleetManagementServer.Migrations.DeviceDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DeviceId");
+                    b.Property<Guid>("DeviceId");
+
+                    b.Property<int?>("DeviceTypeId");
 
                     b.Property<int>("ParameterTypeId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeviceId");
+                    b.HasIndex("DeviceTypeId");
 
                     b.HasIndex("ParameterTypeId");
 
                     b.ToTable("DeviceParameterTypes");
+                });
+
+            modelBuilder.Entity("FleetManagementServer.Areas.Device.Data.DeviceType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Model");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeviceType");
                 });
 
             modelBuilder.Entity("FleetManagementServer.Areas.Device.Data.ParameterPacket", b =>
@@ -117,7 +121,7 @@ namespace FleetManagementServer.Migrations.DeviceDb
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<int>("DeviceId");
+                    b.Property<Guid>("DeviceId");
 
                     b.HasKey("Id");
 
@@ -176,12 +180,18 @@ namespace FleetManagementServer.Migrations.DeviceDb
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("FleetManagementServer.Areas.Device.Data.Device", b =>
+                {
+                    b.HasOne("FleetManagementServer.Areas.Device.Data.DeviceType", "DeviceType")
+                        .WithMany("Devices")
+                        .HasForeignKey("DeviceTypeId");
+                });
+
             modelBuilder.Entity("FleetManagementServer.Areas.Device.Data.DeviceParameterType", b =>
                 {
-                    b.HasOne("FleetManagementServer.Areas.Device.Data.Device", "Device")
+                    b.HasOne("FleetManagementServer.Areas.Device.Data.DeviceType", "DeviceType")
                         .WithMany("DeviceParameterTypes")
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DeviceTypeId");
 
                     b.HasOne("FleetManagementServer.Areas.Device.Data.ParameterType", "ParameterType")
                         .WithMany("DeviceParameterTypes")

@@ -11,11 +11,10 @@ namespace FleetManagementServer.Areas.Vehicle.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            FleetWayBuilder.OnModelCreating(modelBuilder);
-            DeviceBuilder.OnModelCreating(modelBuilder);
-            DriverBuilder.OnModelCreating(modelBuilder);
             VehicleBrandBuilder.OnModelCreating(modelBuilder);
-            VehicleBuilder.OnModelCreating(modelBuilder);
+            VehicleTypeBuilder.OnModelCreating(modelBuilder);
+            FleetWayBuilder.OnModelCreating(modelBuilder);
+
         }
 
         public DbSet<Device> Devices { get; set; }

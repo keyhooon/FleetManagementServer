@@ -9,19 +9,19 @@ namespace FleetManagementServer.Migrations.DeviceDb
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Devices",
+                name: "DeviceType",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Guid = table.Column<Guid>(nullable: false),
-                    Imei = table.Column<string>(nullable: true),
-                    SecurityCode = table.Column<byte[]>(nullable: true),
-                    SecurityCodeVerification = table.Column<bool>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.PrimaryKey("PK_DeviceType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,12 +41,60 @@ namespace FleetManagementServer.Migrations.DeviceDb
                 });
 
             migrationBuilder.CreateTable(
+                name: "Devices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Imei = table.Column<string>(nullable: true),
+                    SecurityCode = table.Column<byte[]>(nullable: true),
+                    SecurityCodeVerification = table.Column<bool>(nullable: false),
+                    DeviceTypeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Devices_DeviceType_DeviceTypeId",
+                        column: x => x.DeviceTypeId,
+                        principalTable: "DeviceType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DeviceParameterTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DeviceId = table.Column<Guid>(nullable: false),
+                    ParameterTypeId = table.Column<int>(nullable: false),
+                    DeviceTypeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeviceParameterTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DeviceParameterTypes_DeviceType_DeviceTypeId",
+                        column: x => x.DeviceTypeId,
+                        principalTable: "DeviceType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DeviceParameterTypes_ParameterTypes_ParameterTypeId",
+                        column: x => x.ParameterTypeId,
+                        principalTable: "ParameterTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ParametersPackets",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DeviceId = table.Column<int>(nullable: false),
+                    DeviceId = table.Column<Guid>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -56,32 +104,6 @@ namespace FleetManagementServer.Migrations.DeviceDb
                         name: "FK_ParametersPackets_Devices_DeviceId",
                         column: x => x.DeviceId,
                         principalTable: "Devices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DeviceParameterTypes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DeviceId = table.Column<int>(nullable: false),
-                    ParameterTypeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DeviceParameterTypes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DeviceParameterTypes_Devices_DeviceId",
-                        column: x => x.DeviceId,
-                        principalTable: "Devices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DeviceParameterTypes_ParameterTypes_ParameterTypeId",
-                        column: x => x.ParameterTypeId,
-                        principalTable: "ParameterTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -142,16 +164,6 @@ namespace FleetManagementServer.Migrations.DeviceDb
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Devices",
-                columns: new[] { "Id", "Guid", "Imei", "SecurityCode", "SecurityCodeVerification" },
-                values: new object[] { 2, new Guid("eccb0560-af46-4cea-a4ef-84a6a132bf75"), "990000862471854", new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }, true });
-
-            migrationBuilder.InsertData(
-                table: "Devices",
-                columns: new[] { "Id", "Guid", "Imei", "SecurityCode", "SecurityCodeVerification" },
-                values: new object[] { 1, new Guid("eccb0560-af46-4cea-a4ef-84a6a132bf75"), "351756051523999", new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }, true });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AvlPackets_ParameterPacketId",
                 table: "AvlPackets",
@@ -159,14 +171,19 @@ namespace FleetManagementServer.Migrations.DeviceDb
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeviceParameterTypes_DeviceId",
+                name: "IX_DeviceParameterTypes_DeviceTypeId",
                 table: "DeviceParameterTypes",
-                column: "DeviceId");
+                column: "DeviceTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceParameterTypes_ParameterTypeId",
                 table: "DeviceParameterTypes",
                 column: "ParameterTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devices_DeviceTypeId",
+                table: "Devices",
+                column: "DeviceTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ParametersPacketDetails_ParameterPacketId",
@@ -203,6 +220,9 @@ namespace FleetManagementServer.Migrations.DeviceDb
 
             migrationBuilder.DropTable(
                 name: "Devices");
+
+            migrationBuilder.DropTable(
+                name: "DeviceType");
         }
     }
 }

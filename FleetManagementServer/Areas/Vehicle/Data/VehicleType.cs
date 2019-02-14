@@ -43,9 +43,11 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public static IEnumerable<VehicleType> Seed()
         {
-            return new VehicleType[] {new VehicleType() {Id =1, Name = "Truck", Image    = ImageHelper.FromFileToByte($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\VehicleTypeImage\\truck.png") },
-                new VehicleType() {Id =2, Name = "bus", Image = ImageHelper.FromFileToByte($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\VehicleTypeImage\\bus.png") },
-                new VehicleType() { Id = 2, Name = "car", Image = ImageHelper.FromFileToByte($"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\VehicleTypeImage\\car.png") }};
+            var ImageFolderPath = $"{Directory.GetCurrentDirectory()}\\Areas\\Vehicle\\Resources\\VehicleTypeImage\\";
+            return new VehicleType[] {
+                new VehicleType() {Id = 1, Name = "Truck", Image = ImageHelper.FromFileToByte($"{ImageFolderPath}truck.png") },
+                new VehicleType() {Id = 2, Name = "bus", Image = ImageHelper.FromFileToByte($"{ImageFolderPath}bus.png") },
+                new VehicleType() {Id = 3, Name = "car", Image = ImageHelper.FromFileToByte($"{ImageFolderPath}car.png") }};
         }
 }
 }

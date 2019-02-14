@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace FleetManagementServer.Areas.Device.Data
@@ -6,10 +7,10 @@ namespace FleetManagementServer.Areas.Device.Data
     public class DeviceParameterType
     {
         public int Id { get; set; }
-        public int DeviceId { get; set; }
+        public Guid DeviceId { get; set; }
         public int ParameterTypeId { get; set; }
 
-        public Device Device { get; set; }
+        public DeviceType DeviceType { get; set; }
         public ParameterType ParameterType { get; set; }
         
     }
