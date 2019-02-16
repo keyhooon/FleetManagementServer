@@ -6,11 +6,20 @@
 @inject FleetwayService FleetWayService
 @{
 }
-@(Html.DevExtreme().TreeView()
-      .DataSource( FleetWayService.GetFleetWaysListAsync().Result)
-      .DataStructure(TreeViewDataStructure.Plain)
-      .KeyExpr("Id")
-      .DisplayExpr("Name")
-      .ParentIdExpr("CategoryId")
-      .VirtualModeEnabled(true)
-      )
+
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <input type="radio" name="gender" value="male" checked> Male<br>
+            </div>
+            <div class="col-sm">
+                <input type="radio" name="gender" value="female"> Female<br>
+            </div>
+            <div class="col-sm">
+                <input type="radio" name="gender" value="other"> Other
+            </div>
+        </div>
+    </div>
+</form>
+

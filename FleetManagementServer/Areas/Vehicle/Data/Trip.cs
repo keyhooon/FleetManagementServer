@@ -6,6 +6,10 @@ namespace FleetManagementServer.Areas.Vehicle.Data
 {
     public class Trip
     {
+        public Trip()
+        {
+            FleetLocations = new HashSet<FleetLocation>();
+        }
         public int Id { get; set; }
         public int FleetWayId { get; set; }
         public int VehicleId { get; set; }
@@ -14,6 +18,7 @@ namespace FleetManagementServer.Areas.Vehicle.Data
         public Vehicle Vehicle { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }
+        public ICollection<FleetLocation> FleetLocations { get; set; }
     }
     public static class TripBuilder
     {

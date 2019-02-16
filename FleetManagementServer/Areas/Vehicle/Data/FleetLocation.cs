@@ -18,7 +18,9 @@ namespace FleetManagementServer.Areas.Vehicle.Data
     {
         public int Id { get; set; }
         public int VehicleId { get; set; }
+        public Nullable<int> TripId { get; set; }
         public Point Location { get; set; }
+        public Trip Trip { get; set; }
         public DateTime Date { get; set; }
     }
 }
